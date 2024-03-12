@@ -15,7 +15,7 @@ export default class extends Module {
 			if (Math.random() < 0.04) {
 				this.post();
 			}
-		}, 1000 * 15 * 10);
+		}, 1000 * 60 * 15);
 
 		return {};
 	}
