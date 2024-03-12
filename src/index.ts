@@ -57,12 +57,14 @@ promiseRetry(retry => {
 }, {
 	retries: 3
 }).then(account => {
+	// @ts-ignore
 	const acct = `@${account.username}`;
 	log(chalk.green(`Account fetched successfully: ${chalk.underline(acct)}`));
 
 	log('Starting AiOS...');
 
 	// 藍起動
+	// @ts-ignore
 	new 藍(account, [
 		new CoreModule(),
 		new EmojiModule(),

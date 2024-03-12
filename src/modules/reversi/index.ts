@@ -58,6 +58,22 @@ export default class extends Module {
 					msg.friend.updateReversiStrength(0);
 				}
 
+				if (msg.includes(['弱'])){
+					msg.friend.updateReversiStrength(2);
+				}
+
+				if (msg.includes(['中'])){
+					msg.friend.updateReversiStrength(3);
+				}
+				
+				if (msg.includes(['強'])){
+					msg.friend.updateReversiStrength(4);
+				}
+
+				if (msg.includes(['最強'])){
+					msg.friend.updateReversiStrength(5);
+				}
+
 				this.ai.api('reversi/match', {
 					userId: msg.userId
 				});

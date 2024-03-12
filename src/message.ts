@@ -37,6 +37,10 @@ export default class Message {
 		return this.note.visibility;
 	}
 
+	public get localOnly(): boolean {
+		return this.note.localOnly;
+	}
+
 	/**
 	 * メンション部分を除いたテキスト本文
 	 */
@@ -63,7 +67,8 @@ export default class Message {
 		// メッセージなどに付いているユーザー情報は省略されている場合があるので完全なユーザー情報を持ってくる
 		this.ai.api('users/show', {
 			userId: this.userId
-		}).then(user => {
+			}).then(user => {
+			// @ts-ignore
 			this.friend.updateUser(user);
 		});
 	}
@@ -83,12 +88,16 @@ export default class Message {
 			await sleep(2000);
 		}
 
+		const replyVisibility = this.note.visibility === 'public' ? 'home' : this.note.visibility;
+
 		return await this.ai.post({
 			replyId: this.note.id,
 			text: text,
 			fileIds: opts?.file ? [opts?.file.id] : undefined,
 			cw: opts?.cw,
-			renoteId: opts?.renote
+			renoteId: opts?.renote,
+			visibility: replyVisibility,
+			localOnly: this.note.localOnly,
 		});
 	}
 

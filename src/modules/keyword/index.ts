@@ -38,7 +38,8 @@ export default class extends Module {
 		const tl = await this.ai.api('notes/local-timeline', {
 			limit: 30
 		});
-
+		
+// @ts-ignore
 		const interestedNotes = tl.filter(note =>
 			note.userId !== this.ai.account.id &&
 			note.text != null &&

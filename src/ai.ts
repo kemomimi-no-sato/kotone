@@ -346,6 +346,7 @@ export default class 藍 {
 	public async upload(file: Buffer | fs.ReadStream, meta: any) {
 		const res = await got.post({
 			url: `${config.apiUrl}/drive/files/create`,
+			// @ts-ignore
 			formData: {
 				i: config.i,
 				file: {
@@ -364,6 +365,7 @@ export default class 藍 {
 	@bindThis
 	public async post(param: any) {
 		const res = await this.api('notes/create', param);
+		// @ts-ignore
 		return res.createdNote;
 	}
 

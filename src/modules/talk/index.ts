@@ -135,7 +135,7 @@ export default class extends Module {
 
 	@bindThis
 	private omedeto(msg: Message): boolean {
-		if (!msg.includes(['おめでと'])) return false;
+		if (!msg.includes(['おめでと', 'おめ', 'おめでとう'])) return false;
 
 		msg.reply(serifs.core.omedeto(msg.friend.name));
 
@@ -288,6 +288,17 @@ export default class extends Module {
 	@bindThis
 	private rmrf(msg: Message): boolean | HandlerResult {
 		if (!msg.includes(['rm -rf'])) return false;
+
+		msg.friend.decLove();
+
+		return {
+			reaction: 'angry'
+		};
+	}
+
+	@bindThis
+	private chibi(msg: Message): boolean | HandlerResult {
+		if (!msg.includes(['ちび', 'チビ'])) return false;
 
 		msg.friend.decLove();
 
