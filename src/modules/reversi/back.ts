@@ -10,7 +10,7 @@ import got from 'got';
 import * as Reversi from './engine.js';
 import config from '@/config.js';
 import serifs from '@/serifs.js';
-import { User } from '@/misskey/user.js';
+import type { User } from '@/misskey/user.js';
 
 function getUserName(user) {
 	return user.name || user.username;
@@ -62,7 +62,8 @@ class Session {
 	}
 
 	private get userName(): string {
-		const name = getUserName(this.user);
+		let name = getUserName(this.user);
+		if (name.includes('$') || name.includes('<') || name.includes('*')) name = this.user.username;
 		return `?[${name}](${config.host}/@${this.user.username})${titles.some(x => name.endsWith(x)) ? '' : 'さん'}`;
 	}
 
@@ -263,7 +264,7 @@ class Session {
 					}
 					break;
 				}
-	
+
 				default:
 					break;
 			}
