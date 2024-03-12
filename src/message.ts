@@ -68,7 +68,7 @@ export default class Message {
 		this.ai.api('users/show', {
 			userId: this.userId
 			}).then(user => {
-			// @ts-ignore
+			//  
 			this.friend.updateUser(user);
 		});
 	}

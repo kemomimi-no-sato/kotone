@@ -57,13 +57,13 @@ export default class extends Module {
 			chart = {
 				title: `@${params.user.username}さんの投稿数`,
 				datasets: [{
-					// @ts-ignore
+					//  
 					data: data.diffs.normal
 				}, {
-					// @ts-ignore
+					//  
 					data: data.diffs.reply
 				}, {
-					// @ts-ignore
+					//  
 					data: data.diffs.renote
 				}]
 			};
@@ -77,10 +77,10 @@ export default class extends Module {
 			chart = {
 				title: `@${params.user.username}さんのフォロワー数`,
 				datasets: [{
-					// @ts-ignore
+					//  
 					data: data.local.followers.total
 				}, {
-					// @ts-ignore
+					//  
 					data: data.remote.followers.total
 				}]
 			};
@@ -92,13 +92,13 @@ export default class extends Module {
 
 			chart = {
 				datasets: [{
-					// @ts-ignore
+					//  
 					data: data.local.diffs.normal
 				}, {
-					// @ts-ignore
+					//  
 					data: data.local.diffs.reply
 				}, {
-					// @ts-ignore
+					//  
 					data: data.local.diffs.renote
 				}]
 			};

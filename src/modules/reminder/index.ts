@@ -149,7 +149,7 @@ export default class extends Module {
 			});
 		} catch (err) {
 			// renote対象が消されていたらリマインダー解除
-			// @ts-ignore
+			//  
 			if (err.statusCode === 400) {
 				this.unsubscribeReply(remind.thing == null && remind.quoteId ? remind.quoteId : remind.id);
 				this.reminds.remove(remind);
