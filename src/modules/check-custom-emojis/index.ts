@@ -32,7 +32,7 @@ export default class extends Module {
 	private timeCheck() {
 		const now = new Date();
 		if (now.getHours() !== 23) return;
-		const date = `${now.getFullYear()}-${now.getMonth()}-${now.getDate()}`;
+		const date = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`;
 		const data = this.getData();
 		if (data.lastPosted == date) return;
 		data.lastPosted = date;
@@ -70,17 +70,23 @@ export default class extends Module {
 			});
 
 			// 各絵文字について投稿
-			for (const emoji of emojisData){
-				await this.ai.post({
-					text: serifs.checkCustomEmojis.emojiPost(emoji.name)
-				});
-				this.log(serifs.checkCustomEmojis.emojiPost(emoji.name));
-			}
+			for (const emoji of emojisData) {
+				if (emoji.name) {
+						await this.ai.post({
+								text: serifs.checkCustomEmojis.emojiPost(emoji.name)
+						});
+						this.log(serifs.checkCustomEmojis.emojiPost(emoji.name));
+				} else {
+						this.log('Error: Invalid emoji data');
+				}
+		}
 		} else {
 			// 一気に投稿ver
 			let text = '';
 			for (const emoji of emojisData){
-				text += serifs.checkCustomEmojis.emojiOnce(emoji.name);
+				if (emoji && emoji.name) {
+					text += serifs.checkCustomEmojis.emojiOnce(emoji.name);
+				}
 			}
 			const message = serifs.checkCustomEmojis.postOnce(server_name, emojiSize, text);
 			this.log(message);
@@ -133,7 +139,9 @@ export default class extends Module {
 			// sinceIdが未指定の場合、末尾から5件程度にしておく
 			let newJson: any[] = [];
 			for (let i = emojisData.length - 5; i < emojisData.length; i++) {
-				newJson.push(emojisData[i]);
+				if (emojisData[i]) {
+					newJson.push(emojisData[i]);
+				}
 			}
 			emojisData = newJson;
 		}

@@ -83,12 +83,16 @@ export default class Message {
 			await sleep(2000);
 		}
 
+		const replyVisibility = this.note.visibility === 'public' ? 'home' : this.note.visibility;
+
 		return await this.ai.post({
 			replyId: this.note.id,
 			text: text,
 			fileIds: opts?.file ? [opts?.file.id] : undefined,
 			cw: opts?.cw,
-			renoteId: opts?.renote
+			renoteId: opts?.renote,
+			visibility: replyVisibility,
+			localOnly: this.note.localOnly,
 		});
 	}
 

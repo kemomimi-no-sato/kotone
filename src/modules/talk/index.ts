@@ -30,6 +30,7 @@ export default class extends Module {
 			this.humu(msg) ||
 			this.batou(msg) ||
 			this.itai(msg) ||
+			this.nemui(msg) ||
 			this.ote(msg) ||
 			this.ponkotu(msg) ||
 			this.rmrf(msg) ||
@@ -225,8 +226,9 @@ export default class extends Module {
 			msg.friend.love >= 5 ? serifs.core.hug.love :
 			msg.friend.love <= -3 ? serifs.core.hug.hate :
 			serifs.core.hug.normal);
-
+			console.log();
 		return true;
+
 	}
 
 	@bindThis
@@ -258,6 +260,18 @@ export default class extends Module {
 		if (!msg.or(['痛い', 'いたい']) && !msg.extractedText.endsWith('痛い')) return false;
 
 		msg.reply(serifs.core.itai(msg.friend.name));
+
+		return true;
+	}
+
+	@bindThis
+	private nemui(msg: Message): boolean {
+		if (!msg.or(['ねむ', '眠'])) return false;
+
+		msg.reply(getSerif(
+			msg.friend.love >= 10 ? serifs.core.nemui.love2 :
+			msg.friend.love >= 5 ? serifs.core.nemui.love1 :
+			serifs.core.nemui.normal));
 
 		return true;
 	}
