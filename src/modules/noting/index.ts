@@ -13,11 +13,21 @@ export default class extends Module {
 	public install() {
 		if (config.notingEnabled === false) return {};
 
-		setInterval(() => {
-			if (Math.random() < 0.04) {
-				this.post();
+    setInterval(() => {
+			const now = new Date();
+			const hour = now.getHours();
+
+			// 23時から7時の間は投稿頻度を低くする
+			if (hour >= 23 || hour < 7) {
+					if (Math.random() < 0.09) { //確率を抑えて投稿頻度を低く設定
+							this.post();
+					}
+			} else {
+					if (Math.random() < 0.6) {
+							this.post();
+					}
 			}
-		}, 1000 * 60 * 10);
+	}, 1000 * 60 * 8);
 
 		this.ai.api('i').then((me) => {
 			this.myUserId = (me as User).id;
@@ -51,6 +61,7 @@ export default class extends Module {
 		//console.log(this.myUserId);
 
 		// TODO: 季節に応じたセリフ
+		// NEW Date()とget.monthを使って場合分けすればいけるかも
 
 		this.ai.post({
 			text: typeof note === 'function' ? note() : note
