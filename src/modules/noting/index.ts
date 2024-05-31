@@ -17,7 +17,7 @@ export default class extends Module {
 			if (Math.random() < 0.04) {
 				this.post();
 			}
-		}, 1000);
+		}, 1000 * 60 * 10);
 
 		this.ai.api('i').then((me) => {
 			this.myUserId = (me as User).id;
