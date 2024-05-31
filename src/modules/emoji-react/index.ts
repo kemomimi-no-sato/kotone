@@ -77,7 +77,8 @@ export default class extends Module {
 		if (includes(note.text, ['ぷりん'])) return react('🍮');
 		if (includes(note.text, ['寿司', 'sushi']) || note.text === 'すし') return react('🍣');
 
-		if (includes(note.text, ['頭痛い', 'お腹痛い'])) return react(':ablobcat_nadenadeyou:');
+		if (includes(note.text, ['あたまがいたい', '頭が痛い', '頭痛え', '頭痛', 'あたまいたい', '頭痛い', ':ablobcatpnd_headache:'])) return react(':ablobcat_nadenadeyou:');
+		if (includes(note.text, ['おなかがいたい', 'お腹が痛い', 'お腹痛え', '腹が痛い', 'お腹痛い', 'おなかいたい', ':ablobcatpnd_stomachache:'])) return react(':blobcatpnd_onaka_nade:');
 
 		if (includes(note.text, ['てんか', 'てんかちゃん'])){
 			if (note.userId === this.myUserId) {
