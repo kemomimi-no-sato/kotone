@@ -202,6 +202,11 @@ export default class 藍 {
 		setInterval(this.logWaking, 10000);
 
 		this.log(chalk.green.bold('Ai am now running!'));
+
+		this.post({
+			visibility: 'home',
+			text: 'ん、起きたよ。おはよ。',
+		})
 	}
 
 	/**

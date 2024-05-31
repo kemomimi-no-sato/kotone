@@ -34,6 +34,12 @@ import NotingModule from './modules/noting/index.js';
 import PollModule from './modules/poll/index.js';
 import ReminderModule from './modules/reminder/index.js';
 import CheckCustomEmojisModule from './modules/check-custom-emojis/index.js';
+import LoveRateModule from './modules/loveRate/index.js';
+import JihouModule from './modules/jihou/index.js';
+import IsNaniModule from './modules/is-nani/index.js';
+import JMAEEWModule from './modules/jma_eew/index.js';
+import JMAEQModule from './modules/jma_eq/index.js';
+import RecipeModule from './modules/recipe/index.js';
 
 console.log('   __    ____  _____  ___ ');
 console.log('  /__\\  (_  _)(  _  )/ __)');
@@ -96,7 +102,15 @@ promiseRetry(retry => {
 		new PollModule(),
 		new ReminderModule(),
 		new CheckCustomEmojisModule(),
+		new LoveRateModule(),
+		new JihouModule(),
+		new IsNaniModule(),
+		new JMAEEWModule(),
+		new JMAEQModule(),
+		new RecipeModule(),
 	]);
+
+	
 }).catch(e => {
 	log(chalk.red('Failed to fetch the account'));
 });

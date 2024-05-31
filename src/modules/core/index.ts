@@ -66,7 +66,17 @@ export default class extends Module {
 		if (!msg.text.includes('って呼んで')) return false;
 		if (msg.text.startsWith('って呼んで')) return false;
 
-		const name = msg.text.match(/^(.+?)って呼んで/g)![1];
+		//宛先を削除
+		const cleanedText = msg.text.replace(/^@\w+\s*/, '');
+		
+		// `g` フラグを削除
+    const match = cleanedText.match(/^(.+?)って呼んで/);
+    if (!match) return false;
+
+    // マッチした結果からキャプチャグループを取得
+    const name = match[1];
+		
+		if (name === undefined) return false;
 
 		if (name.length > 10) {
 			msg.reply(serifs.core.tooLong);

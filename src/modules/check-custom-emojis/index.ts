@@ -31,7 +31,7 @@ export default class extends Module {
 	@bindThis
 	private timeCheck() {
 		const now = new Date();
-		if (now.getHours() !== 23) return;
+		if (![23, 21, 18, 15, 12, 9, 6, 3].includes(now.getHours())) return;
 		const date = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`;
 		const data = this.getData();
 		if (data.lastPosted == date) return;

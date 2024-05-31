@@ -6,25 +6,34 @@ import Module from '@/module.js';
 import Stream from '@/stream.js';
 import includes from '@/utils/includes.js';
 import { sleep } from '@/utils/sleep.js';
+import type { User } from '@/misskey/user.js';
 
 export default class extends Module {
 	public readonly name = 'emoji-react';
 
 	private htl: ReturnType<Stream['useSharedConnection']>;
-
+	private myUserId: string | null = null;
+	
 	@bindThis
 	public install() {
 		this.htl = this.ai.connection.useSharedConnection('homeTimeline');
 		this.htl.on('note', this.onNote);
 
+		this.ai.api('i').then((me) => {
+			this.myUserId = (me as User).id;
+		}).catch((error) => {
+			this.log(`Failed to fetch user ID: ${error}`);
+		});
+
 		return {};
 	}
 
 	@bindThis
-	private async onNote(note: Note) {
+	private async onNote(note: Note, user: User) {
 		if (note.reply != null) return;
 		if (note.text == null) return;
 		if (note.text.includes('@')) return; // (自分または他人問わず)メンションっぽかったらreject
+		if (note.text.includes('<plain>')) return;
 
 		const react = async (reaction: string, immediate = false) => {
 			if (!immediate) {
@@ -68,6 +77,14 @@ export default class extends Module {
 		if (includes(note.text, ['ぷりん'])) return react('🍮');
 		if (includes(note.text, ['寿司', 'sushi']) || note.text === 'すし') return react('🍣');
 
-		if (includes(note.text, ['ことね', 'ことねちゃん', 'ことちゃん'])) return react('🙌');
+		if (includes(note.text, ['頭痛い', 'お腹痛い'])) return react(':ablobcat_nadenadeyou:');
+
+		if (includes(note.text, ['てんか', 'てんかちゃん'])){
+			if (note.userId === this.myUserId) {
+				return;
+			} else {
+				return react('🙌');
+			} 
+		}
 	}
 }

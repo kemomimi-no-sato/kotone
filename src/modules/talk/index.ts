@@ -30,6 +30,10 @@ export default class extends Module {
 			this.humu(msg) ||
 			this.batou(msg) ||
 			this.itai(msg) ||
+			this.tsurai(msg) ||
+			this.kurushii(msg) ||
+			this.referense(msg) ||
+			this.about(msg) ||
 			this.nemui(msg) ||
 			this.ote(msg) ||
 			this.ponkotu(msg) ||
@@ -184,6 +188,19 @@ export default class extends Module {
 			msg.friend.love <= -3 ? serifs.core.kawaii.hate :
 			serifs.core.kawaii.normal));
 
+		if (msg.friend.love >= 0) {
+			const today = getDate();
+
+			const data = msg.friend.getPerModulesData(this);
+
+			if (data.lastKawaiiAt != today) {
+				data.lastKawaiiAt = today;
+				msg.friend.setPerModulesData(this, data);
+
+				msg.friend.incLove();
+			}
+		}
+
 		return true;
 	}
 
@@ -195,6 +212,19 @@ export default class extends Module {
 			msg.friend.love >= 5 ? (msg.friend.name ? serifs.core.suki.love(msg.friend.name) : serifs.core.suki.normal) :
 			msg.friend.love <= -3 ? serifs.core.suki.hate :
 			serifs.core.suki.normal);
+
+		if (msg.friend.love >= 0) {
+			const today = getDate();
+
+			const data = msg.friend.getPerModulesData(this);
+
+			if (data.lastSukiAt != today) {
+				data.lastSukiAt = today;
+				msg.friend.setPerModulesData(this, data);
+
+				msg.friend.incLove();
+			}
+		}
 
 		return true;
 	}
@@ -222,11 +252,24 @@ export default class extends Module {
 		msg.friend.setPerModulesData(this, data);
 		//#endregion
 
-		msg.reply(
+		msg.reply(getSerif(
 			msg.friend.love >= 5 ? serifs.core.hug.love :
 			msg.friend.love <= -3 ? serifs.core.hug.hate :
-			serifs.core.hug.normal);
+			serifs.core.hug.normal));
 			console.log();
+
+		if (msg.friend.love >= 0) {
+			const today = getDate();
+
+			const data = msg.friend.getPerModulesData(this);
+
+			if (data.lastHugAt != today) {
+				data.lastHugAt = today;
+				msg.friend.setPerModulesData(this, data);
+
+				msg.friend.incLove();
+			}
+		}
 		return true;
 
 	}
@@ -263,6 +306,59 @@ export default class extends Module {
 
 		return true;
 	}
+
+	@bindThis
+	private tsurai(msg: Message): boolean {
+		if (!msg.or(['辛い', 'つらい'])) return false;
+
+		if (msg.visibility !== 'specified') return true;
+
+		msg.reply(
+			msg.friend.love >= 5 ? serifs.core.tsurai.love(msg.friend.name) :
+			msg.friend.love <= -3 ? serifs.core.tsurai.hate :
+			serifs.core.tsurai.normal(msg.friend.name));
+
+		return true;
+	}
+
+	@bindThis
+	private kurushii(msg: Message): boolean {
+		if (!msg.or(['苦しい', 'くるしい'])) return false;
+
+		if (msg.visibility !== 'specified') return true;
+
+		msg.reply(
+			msg.friend.love >= 5 ? serifs.core.kurushii.love(msg.friend.name) :
+			msg.friend.love <= -3 ? serifs.core.kurushii.hate :
+			serifs.core.kurushii.normal(msg.friend.name));
+
+		return true;
+	}
+
+	@bindThis
+	private referense(msg: Message): boolean {
+		if (!msg.or(['/charref'])) return false;
+
+		if (msg.visibility !== 'specified') return true;
+
+		msg.reply(
+			msg.friend.love >= 15 ? serifs.reference.love :
+			serifs.reference.normal);
+
+		return true;
+	}
+
+	@bindThis
+	private about(msg: Message): boolean {
+		if (!msg.or(['/about'])) return false;
+
+		if (msg.visibility !== 'specified') return true;
+
+		msg.reply(serifs.howtouse);
+
+		return true;
+	}
+
 
 	@bindThis
 	private nemui(msg: Message): boolean {

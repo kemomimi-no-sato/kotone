@@ -3,9 +3,11 @@ import Module from '@/module.js';
 import serifs from '@/serifs.js';
 import { genItem } from '@/vocabulary.js';
 import config from '@/config.js';
+import type { User } from '@/misskey/user.js';
 
 export default class extends Module {
 	public readonly name = 'noting';
+	private myUserId: string | null = null;
 
 	@bindThis
 	public install() {
@@ -16,6 +18,12 @@ export default class extends Module {
 				this.post();
 			}
 		}, 1000);
+
+		this.ai.api('i').then((me) => {
+			this.myUserId = (me as User).id;
+		}).catch((error) => {
+			this.log(`Failed to fetch user ID: ${error}`);
+		});
 
 		return {};
 	}
@@ -39,6 +47,8 @@ export default class extends Module {
 		];
 
 		const note = notes[Math.floor(Math.random() * notes.length)];
+
+		//console.log(this.myUserId);
 
 		// TODO: 季節に応じたセリフ
 

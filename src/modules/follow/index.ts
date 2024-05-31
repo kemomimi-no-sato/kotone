@@ -19,6 +19,7 @@ export default class extends Module {
 				this.ai.api('following/create', {
 					userId: msg.userId,
 				});
+				msg.reply('ん、これからよろしく。', { immediate: true });
 				return {
 					reaction: msg.friend.love >= 0 ? 'like' : null
 				};
