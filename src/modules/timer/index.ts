@@ -16,11 +16,6 @@ export default class extends Module {
 	}
 
 	@bindThis
-	public get visibility(): string {
-		return this.note.visibility;
-	}
-
-	@bindThis
 	private async mentionHook(msg: Message) {
 		const secondsQuery = (msg.text || '').match(/([0-9]+)秒/);
 		const minutesQuery = (msg.text || '').match(/([0-9]+)分/);

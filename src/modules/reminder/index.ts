@@ -36,11 +36,6 @@ export default class extends Module {
 	}
 
 	@bindThis
-	public get visibility(): string {
-		return this.note.visibility;
-	}
-
-	@bindThis
 	private async mentionHook(msg: Message) {
 		let text = msg.extractedText.toLowerCase();
 		if (!text.startsWith('remind') && !text.startsWith('todo')) return false;
