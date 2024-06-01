@@ -75,6 +75,7 @@ export default class extends Module {
 		}
 
 		this.ai.post({
+			visibility: 'home',
 			text: text
 		});
 	}

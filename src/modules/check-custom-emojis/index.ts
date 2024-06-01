@@ -66,6 +66,7 @@ export default class extends Module {
 			// 概要について投稿
 			this.log(serifs.checkCustomEmojis.post(server_name, emojiSize));
 			await this.ai.post({
+				visibility: 'home',
 				text: serifs.checkCustomEmojis.post(server_name, emojiSize)
 			});
 
@@ -73,7 +74,8 @@ export default class extends Module {
 			for (const emoji of emojisData) {
 				if (emoji.name) {
 						await this.ai.post({
-								text: serifs.checkCustomEmojis.emojiPost(emoji.name)
+							visibility: 'home',
+							text: serifs.checkCustomEmojis.emojiPost(emoji.name)
 						});
 						this.log(serifs.checkCustomEmojis.emojiPost(emoji.name));
 				} else {
@@ -91,6 +93,7 @@ export default class extends Module {
 			const message = serifs.checkCustomEmojis.postOnce(server_name, emojiSize, text);
 			this.log(message);
 			await this.ai.post({
+				visibility: 'home',
 				text: message
 			});
 		}

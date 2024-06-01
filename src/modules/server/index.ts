@@ -71,6 +71,7 @@ export default class extends Module {
 		//#endregion
 
 		this.ai.post({
+			visibility: 'home',
 			text: serifs.server.cpu
 		});
 

@@ -6,6 +6,7 @@ import Module from '@/module.js';
 import { bindThis } from "@/decorators.js";
 
 import accurateInterval from 'accurate-interval';
+import { homedir } from 'node:os';
 
 export default class extends Module {
 	public readonly name = 'jihou';
@@ -27,41 +28,48 @@ export default class extends Module {
 		switch (hour) {
 			default:
 				this.ai.post({
+					visibility: 'home',
 					text: `${hour}時だよ。`
 				});
 				break;
 
 			case 7:
 				this.ai.post({
+					visibility: 'home',
 					text: `おはよ……${hour}時だよ……ねむい……`
 				});
 				break;
 
 			case 12:
 				this.ai.post({
+					visibility: 'home',
 					text: `${hour}時だよ。一緒におやつたべよ。`
 				});
 				break;
 
 			case 15:
 				this.ai.post({
+					visibility: 'home',
 					text: `${hour}時だよ。一緒におやつたべよ。`
 				});
 				break;
 
 			case 24:
 				this.ai.post({
+					visibility: 'home',
 					text: `あけおめ。${hour}時だよ。`
 				})
 
 			case 1:
 				this.ai.post({
+					visibility: 'home',
 					text: `${hour}時だよ。寝ないと朝に響くよ。`
 				});
 				break;
 
 			case 5:
 				this.ai.post({
+					visibility: 'home',
 					text: `${hour}時だよ。みんな早起きだね……わたしは二度寝するよ……Zzz……`
 				});
 				break;

@@ -5,6 +5,7 @@ import serifs from '@/serifs.js';
 
 export default class extends Module {
 	public readonly name = 'timer';
+	private note: any;
 
 	@bindThis
 	public install() {
@@ -12,6 +13,11 @@ export default class extends Module {
 			mentionHook: this.mentionHook,
 			timeoutCallback: this.timeoutCallback,
 		};
+	}
+
+	@bindThis
+	public get visibility(): string {
+		return this.note.visibility;
 	}
 
 	@bindThis
@@ -60,6 +66,7 @@ export default class extends Module {
 		const friend = this.ai.lookupFriend(data.userId);
 		if (friend == null) return; // 処理の流れ上、実際にnullになることは無さそうだけど一応
 		const text = serifs.timer.notify(data.time, friend.name);
+
 		this.ai.post({
 			replyId: data.msgId,
 			text: text

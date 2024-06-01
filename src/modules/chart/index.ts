@@ -36,6 +36,7 @@ export default class extends Module {
 
 		this.log('Posting...');
 		this.ai.post({
+			visibility: 'home',
 			text: serifs.chart.post,
 			fileIds: [file.id]
 		});

@@ -167,6 +167,7 @@ export default class extends Module {
 		if (game.votes.length <= 1) {
 			this.ai.post({
 				text: serifs.kazutori.onagare,
+				visibility: 'home',
 				renoteId: game.postId
 			});
 
@@ -204,6 +205,7 @@ export default class extends Module {
 		this.ai.post({
 			text: text,
 			cw: serifs.kazutori.finish,
+			visibility: 'home',
 			renoteId: game.postId
 		});
 

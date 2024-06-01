@@ -24,10 +24,12 @@ export default class extends Module {
 
 		if (sleepHours >= 1) {
 			this.ai.post({
+				visibility: 'home',
 				text: serifs.sleepReport.report(Math.round(sleepHours))
 			});
 		} else {
 			this.ai.post({
+				visibility: 'home',
 				text: serifs.sleepReport.reportUtatane
 			});
 		}

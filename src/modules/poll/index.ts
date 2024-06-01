@@ -74,6 +74,7 @@ export default class extends Module {
 		];
 
 		const note = await this.ai.post({
+			visibility: 'home',
 			text: poll[1],
 			poll: {
 				choices,
@@ -125,11 +126,13 @@ export default class extends Module {
 
 		if (mostVotedChoice.votes === 0) {
 			this.ai.post({ // TODO: Extract serif
+				visibility: 'home',
 				text: '投票はありませんでした',
 				renoteId: noteId,
 			});
 		} else if (mostVotedChoices.length === 1) {
 			this.ai.post({ // TODO: Extract serif
+				visibility: 'home',
 				cw: `${title}アンケートの結果発表です！`,
 				text: `結果は${mostVotedChoice.votes}票の「${mostVotedChoice.text}」でした！`,
 				renoteId: noteId,
@@ -137,6 +140,7 @@ export default class extends Module {
 		} else {
 			const choices = mostVotedChoices.map(choice => `「${choice.text}」`).join('と');
 			this.ai.post({ // TODO: Extract serif
+				visibility: 'home',
 				cw: `${title}アンケートの結果発表です！`,
 				text: `結果は${mostVotedChoice.votes}票の${choices}でした！`,
 				renoteId: noteId,

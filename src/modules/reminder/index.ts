@@ -5,11 +5,13 @@ import Message from '@/message.js';
 import serifs, { getSerif } from '@/serifs.js';
 import { acct } from '@/utils/acct.js';
 import config from '@/config.js';
+import { notEqual } from 'node:assert';
 
 const NOTIFY_INTERVAL = 1000 * 60 * 60 * 12;
 
 export default class extends Module {
 	public readonly name = 'reminder';
+	private note: any;
 
 	private reminds: loki.Collection<{
 		userId: string;
@@ -31,6 +33,11 @@ export default class extends Module {
 			contextHook: this.contextHook,
 			timeoutCallback: this.timeoutCallback,
 		};
+	}
+
+	@bindThis
+	public get visibility(): string {
+		return this.note.visibility;
 	}
 
 	@bindThis
@@ -140,6 +147,7 @@ export default class extends Module {
 
 		const friend = this.ai.lookupFriend(remind.userId);
 		if (friend == null) return; // 処理の流れ上、実際にnullになることは無さそうだけど一応
+
 
 		let reply;
 		try {

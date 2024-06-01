@@ -64,6 +64,7 @@ export default class extends Module {
 		// NEW Date()とget.monthを使って場合分けすればいけるかも
 
 		this.ai.post({
+			visibility: 'home',
 			text: typeof note === 'function' ? note() : note
 		});
 	}

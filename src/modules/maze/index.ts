@@ -34,6 +34,7 @@ export default class extends Module {
 		this.log('Posting...');
 		this.ai.post({
 			text: serifs.maze.post,
+			visibility: 'home',
 			fileIds: [file.id]
 		});
 	}
