@@ -216,52 +216,52 @@ export default {
 		/**
 		 * 対局開始
 		 */
-		started: (name, strength) => `対局を${name}と始めたよ。 (強さ${strength})`,
+		started: (name, strength) => `対局を${name}と始めたよ。 (強さ${strength})\n#tenka_reversi`,
 
 		/**
 		 * 接待開始
 		 */
-		startedSettai: name => `(${name}の接待を始めたよ。)`,
+		startedSettai: name => `(${name}の接待を始めたよ。)\n#tenka_reversi`,
 
 		/**
 		 * 勝ったとき
 		 */
-		iWon: name => `${name}に勝ったよ。`,
+		iWon: name => `${name}に勝ったよ。\n#tenka_reversi`,
 
 		/**
 		 * 接待のつもりが勝ってしまったとき
 		 */
-		iWonButSettai: name => `(${name}に接待で勝っちゃった……)`,
+		iWonButSettai: name => `(${name}に接待で勝っちゃった……)\n#tenka_reversi`,
 
 		/**
 		 * 負けたとき
 		 */
-		iLose: name => `${name}に負けた。次は負けないよ。`,
+		iLose: name => `${name}に負けた。次は負けないよ。\n#tenka_reversi`,
 
 		/**
 		 * 接待で負けてあげたとき
 		 */
-		iLoseButSettai: name => `(${name}に接待で負けてあげたよ。)`,
+		iLoseButSettai: name => `(${name}に接待で負けてあげたよ。)\n#tenka_reversi`,
 
 		/**
 		 * 引き分けたとき
 		 */
-		drawn: name => `${name}と引き分けたよ。`,
+		drawn: name => `${name}と引き分けたよ。\n#tenka_reversi`,
 
 		/**
 		 * 接待で引き分けたとき
 		 */
-		drawnSettai: name => `(${name}に接待で引き分けたよ。)`,
+		drawnSettai: name => `(${name}に接待で引き分けたよ。)\n#tenka_reversi`,
 
 		/**
 		 * 相手が投了したとき
 		 */
-		youSurrendered: name => `${name}が投了しちゃったよ。`,
+		youSurrendered: name => `${name}が投了しちゃったよ。\n#tenka_reversi`,
 
 		/**
 		 * 接待してたら相手が投了したとき
 		 */
-		settaiButYouSurrendered: name => `(${name}を接待してたら投了されちゃった。ごめんね。)`,
+		settaiButYouSurrendered: name => `(${name}を接待してたら投了されちゃった。ごめんね。)\n#tenka_reversi`,
 	},
 
 	/**
