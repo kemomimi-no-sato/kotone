@@ -311,7 +311,7 @@ export default class extends Module {
 	private tsurai(msg: Message): boolean {
 		if (!msg.or(['辛い', 'つらい'])) return false;
 
-		if (msg.visibility !== 'specified') return true;
+		if (msg.visibility !== 'specified') return false;
 
 		msg.reply(
 			msg.friend.love >= 5 ? serifs.core.tsurai.love(msg.friend.name) :
@@ -325,7 +325,7 @@ export default class extends Module {
 	private kurushii(msg: Message): boolean {
 		if (!msg.or(['苦しい', 'くるしい'])) return false;
 
-		if (msg.visibility !== 'specified') return true;
+		if (msg.visibility !== 'specified') return false;
 
 		msg.reply(
 			msg.friend.love >= 5 ? serifs.core.kurushii.love(msg.friend.name) :
@@ -339,7 +339,7 @@ export default class extends Module {
 	private referense(msg: Message): boolean {
 		if (!msg.or(['/charref'])) return false;
 
-		if (msg.visibility !== 'specified') return true;
+		if (msg.visibility !== 'specified') return false;
 
 		msg.reply(
 			msg.friend.love >= 15 ? serifs.reference.love :
@@ -352,7 +352,7 @@ export default class extends Module {
 	private about(msg: Message): boolean {
 		if (!msg.or(['/about'])) return false;
 
-		if (msg.visibility !== 'specified') return true;
+		if (msg.visibility !== 'specified') return false;
 
 		msg.reply(serifs.howtouse);
 

@@ -70,11 +70,11 @@ export default class extends Module {
 		const cleanedText = msg.text.replace(/^@\w+\s*/, '');
 		
 		// `g` フラグを削除
-    const match = cleanedText.match(/^(.+?)って呼んで/);
-    if (!match) return false;
+		const match = cleanedText.match(/^(.+?)って呼んで/);
+		if (!match) return false;
 
-    // マッチした結果からキャプチャグループを取得
-    const name = match[1];
+		// マッチした結果からキャプチャグループを取得
+		const name = match[1];
 		
 		if (name === undefined) return false;
 
